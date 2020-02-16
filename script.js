@@ -9,41 +9,68 @@ const LOCAL_OBJ = "オブジェクトで設定したオブジェクトメソッ�
 //吹き出しの番号を指定するID
 let talkID = 0;
 //グローバル変数(定数)
-const whatBobSays = GLOBAL;
+let whatBobSays = GLOBAL;
 
 //起動時に呼ばれる
 window.onload= function(){
-    //起動時に呼び出す関数
-    bob();
+	//起動時に呼び出す関数
+	bob();
 }
 
 //talkIDに応じてBobの発する言葉を決める関数
 function bob(){
-    const  whatBobSays =LOCAL_BOB;
-    for(let talkID=0; talkID<=5; talkID++){
+	const  whatBobSays = LOCAL_BOB; 
+	for(let talkID=0; talkID<=5; talkID++){
 
-        const  whatBobSays = LOCAL_FOR; //ローカル変数(定数)
+		let  whatBobSays = LOCAL_FOR; //ローカル変数(定数)　★★constからletに変更★★
 
-        switch(talkID){
-            case 0: //itch文の`case`の中で、ID2の文字列が格納された変数`whatBobSays`を宣言して使用する
-            break;
+		switch(talkID){
+			case 0: { //itch文の`case`の中で、ID2の文字列が格納された変数`whatBobSays`を宣言して使用する
+				const whatBobSays = LOCAL_SWITCH;
+				console.log(whatBobSays);
+				break;
+			}
 
-            case 1: //ID1の文字列が既に格納され関数`bob()`のローカル変数`whatBobSays`を使用する
-            break;
+			case 1: { //ID1の文字列が既に格納され関数`bob()`のローカル変数`whatBobSays`を使用する
+				let whatBobSays = LOCAL_BOB;
+				console.log(whatBobSays);
+				break;
+		 	}
 
-            case 2: //ID2の文字列が既に格納されたグローバル変数`whatBobSays`を使用する
-            break;
+			case 2: { //ID2の文字列が既に格納されたグローバル変数`whatBobSays`を使用する
+				let whatBobSays = GLOBAL;
+				console.log(whatBobSays);
+				break;
+		  }
 
-            case 3://関数`bob()`の中で関数`whatBobSays`を作成し、その中で宣言したものを利用する
-            break;
+			case 3: {//関数`bob()`の中で関数`whatBobSays`を作成し、その中で宣言したものを利用する
+				let whatBobSays = function() {
+					const caseThree = LOCAL_NEST_FUNCTION;
+					return caseThree;
+				};
+				console.log(whatBobSays());
+				break;
+			}
 
-            case 4: //関数`bob()`内のfor文のブロックスコープにある、ID4の文字列が格納された変数`whatBobSays`から取得する
-            break;
+			case 4: { //関数`bob()`内のfor文のブロックスコープにある、ID4の文字列が格納された変数`whatBobSays`から取得する
+				console.log(whatBobSays);
+				break;
+		 	}
 
-            default: //オブジェクトを作成し、ID5の文字列を返すオブジェクトメソッド`whatBobSays`を使用する
-            break;
-        }
-    }
+			default: { //オブジェクトを作成し、ID5の文字列を返すオブジェクトメソッド`whatBobSays`を使用する
+				let whatBobSays = {
+					caseFive: LOCAL_OBJ,
+						getCase: function() {
+							this.caseFive = LOCAL_OBJ;
+							return this.caseFive;
+						}
+				};
+				console.log(whatBobSays.getCase());
+				break;
+		 	}
+		 
+		}
+	}
 }
 
 
