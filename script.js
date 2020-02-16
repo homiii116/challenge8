@@ -84,3 +84,4 @@ function setDialog(whatHeSays,talkID){
          talkID++;
     }
 }
+//  変更
