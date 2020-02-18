@@ -9,7 +9,7 @@ const LOCAL_OBJ = "オブジェクトで設定したオブジェクトメソッ�
 //吹き出しの番号を指定するID
 let talkID = 0;
 //グローバル変数(定数)
-let whatBobSays = GLOBAL;
+var whatBobSays = GLOBAL;
 
 //起動時に呼ばれる
 window.onload= function(){
@@ -19,52 +19,56 @@ window.onload= function(){
 
 //talkIDに応じてBobの発する言葉を決める関数
 function bob(){
-	const  whatBobSays = LOCAL_BOB; 
+  const whatBobSays = LOCAL_BOB;  
+  const what_BobSays = whatBobSays; 
 	for(let talkID=0; talkID<=5; talkID++){
 
-		let  whatBobSays = LOCAL_FOR; //ローカル変数(定数)　★★constからletに変更★★
+		const whatBobSays = LOCAL_FOR; //ローカル変数(定数)
 
 		switch(talkID){
 			case 0: { //itch文の`case`の中で、ID2の文字列が格納された変数`whatBobSays`を宣言して使用する
-				const whatBobSays = LOCAL_SWITCH;
+        const whatBobSays = LOCAL_SWITCH;
+        setDialog(whatBobSays, talkID);
 				console.log(whatBobSays);
 				break;
 			}
 
 			case 1: { //ID1の文字列が既に格納され関数`bob()`のローカル変数`whatBobSays`を使用する
-				let whatBobSays = LOCAL_BOB;
-				console.log(whatBobSays);
+				setDialog(what_BobSays, talkID);
+				console.log(what_BobSays);
 				break;
 		 	}
 
-			case 2: { //ID2の文字列が既に格納されたグローバル変数`whatBobSays`を使用する
-				let whatBobSays = GLOBAL;
-				console.log(whatBobSays);
+      case 2: { //ID2の文字列が既に格納されたグローバル変数`whatBobSays`を使用する
+        setDialog(this.whatBobSays, talkID); 
+        console.log(whatBobSays);
 				break;
 		  }
 
-			case 3: {//関数`bob()`の中で関数`whatBobSays`を作成し、その中で宣言したものを利用する
-				let whatBobSays = function() {
+			case 3: { //関数`bob()`の中で関数`whatBobSays`を作成し、その中で宣言したものを利用する
+				const whatBobSays = function() {
 					const caseThree = LOCAL_NEST_FUNCTION;
 					return caseThree;
-				};
+        };
+        setDialog(whatBobSays(), talkID);
 				console.log(whatBobSays());
 				break;
 			}
 
 			case 4: { //関数`bob()`内のfor文のブロックスコープにある、ID4の文字列が格納された変数`whatBobSays`から取得する
+				setDialog(whatBobSays, talkID);
 				console.log(whatBobSays);
 				break;
 		 	}
 
 			default: { //オブジェクトを作成し、ID5の文字列を返すオブジェクトメソッド`whatBobSays`を使用する
-				let whatBobSays = {
-					caseFive: LOCAL_OBJ,
+				const whatBobSays = {
+					whatBobSays: LOCAL_OBJ,
 						getCase: function() {
-							this.caseFive = LOCAL_OBJ;
-							return this.caseFive;
+							return this.whatBobSays;
 						}
-				};
+        };
+        setDialog(whatBobSays.getCase(), talkID);
 				console.log(whatBobSays.getCase());
 				break;
 		 	}
@@ -73,15 +77,15 @@ function bob(){
 	}
 }
 
-
 //「発言する文字列」「発言を識別する番号」を入力すると画面の吹き出しに表示してくれる関数
 function setDialog(whatHeSays,talkID){
-    if(talkID<=5){
-        let bobSays = document.getElementsByClassName("bob-says");
-        //Bobの吹き出しに文字列を表示
-         bobSays[talkID].firstElementChild.innerHTML = whatHeSays;
-         console.log(talkID);
-         talkID++;
-    }
+  if(talkID<=5){
+    let bobSays = document.getElementsByClassName("bob-says");
+    //Bobの吹き出しに文字列を表示
+    bobSays[talkID].firstElementChild.innerHTML = whatHeSays;
+    console.log(talkID);
+    talkID++;
+  }
 }
+
 //  変更
